@@ -1,0 +1,20 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-height: 100vh;
+  background-color: black;
+  padding: 30px;
+  row-gap: 40px;
+}
+
+.planetContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-height: 100vh;
+  background-color: black;
+  padding: 30px;
+  row-gap: 40px;
+}

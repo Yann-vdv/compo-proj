@@ -1,0 +1,20 @@
+.planet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+  
+.imageContainer {
+    display: flex;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+}
+  
+.image {
+    max-width: 300px;
+    max-height: 300px;
+}

@@ -1,0 +1,14 @@
+.titleContainer {
+    color: white;
+    cursor: pointer;
+}
+
+.title {
+    text-align: center;
+}
+
+.road {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20%;
+}
