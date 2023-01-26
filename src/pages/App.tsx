@@ -36,7 +36,7 @@ export const App = () => {
     if (data) {
       const newList = data.map((item,key) => {
         if (key === id) {
-          let newPop = Math.floor(parseInt(item.population) - rand - (parseInt(item.population)/100*10));
+          let newPop:number = item.population === "unknown" ? 0 : Math.floor(parseInt(item.population) - rand - (parseInt(item.population)/100*10));
           const updatedItem = {
             ...item,
             population: `${newPop < 0 ? 0 : newPop}`,
@@ -51,14 +51,14 @@ export const App = () => {
 
   return (
     <div className="App">
-      {showTitle && 
+      {/* {showTitle && 
         <Title
           onClick={() => setShowTitle(false)}
           title='Usage de composant'
           text1='Composant customisable'
           text2='props (données)'
           text3='Composant customisé'
-        />}
+        />} */}
       <div className='planetContainer'>
         {data?.map((item:PlanetType,key:number) => 
           <Planet 
@@ -66,7 +66,7 @@ export const App = () => {
             key={key} 
             image={item.name === 'Yavin IV' ? 'Yavin' : item.name}
             buttonFct={() => attack(key)}
-            buttonText='ATTAQUE'
+            buttonText='ATTAQUER'
           />
         )}
       </div>

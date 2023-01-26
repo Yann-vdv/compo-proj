@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import '../asset/css/planet.css';
 
 interface PlanetType {
@@ -24,18 +25,47 @@ interface PlanetType {
 
 export const Planet = (planet:PlanetType) => {
 
+    const [isDestroyed,setIsDestroyed] = useState(false);
+
+    useEffect(() => {
+        if (parseInt(planet.data.population) <= 0) {
+            setIsDestroyed(true);
+        }
+    },[planet.data.population])
+
+    const formatePop = (popToFormate : string | number) => {
+        let pop = popToFormate.toString()
+        if (pop === "unknown") {
+            return pop;
+        } else {
+            let newPop = "";
+            for (let i = pop.length; i > 0; i = i - 3) {
+                newPop = pop.substring(i,i-3) + " " + newPop;
+            }
+            return newPop;
+        }
+    }
+
     return (
         <div className='planet'>
             <div className="imageContainer">
-                <img className='image' src={require(`../asset/image/planets/${planet.image}.jpg`)} alt={planet.data.name}/>
+                <img 
+                    className='image' 
+                    src={
+                        isDestroyed ?
+                            require('../asset/image/destroyed.jpg')
+                            : require(`../asset/image/planets/${planet.image}.jpg`)
+                        }
+                    alt={planet.data.name}
+                />
             </div>
             <h3>{planet.data.name}</h3>
-            <p>Diamètre : {planet.data.diameter} km</p>
-            <p>Climat : {planet.data.climate}</p>
-            <p>Gravité : {planet.data.gravity}</p>
-            <p>Période de rotation : {planet.data.rotation_period} h</p>
-            <p>Population : {planet.data.population}</p>
-            <button onClick={planet.buttonFct}>{planet.buttonText}</button>
+            <p>Diamètre : {isDestroyed ? "unknown" : planet.data.diameter + " km"}</p>
+            <p>Climat : {isDestroyed ? "unknown" : planet.data.climate}</p>
+            <p>Gravité : {isDestroyed ? "unknown" : planet.data.gravity}</p>
+            <p>Période de rotation : {isDestroyed ? "unknown" : planet.data.rotation_period + " h"}</p>
+            <p>Population : {isDestroyed ? "unknown" : formatePop(planet.data.population)}</p>
+            {!isDestroyed && <button className='attackButton' onClick={planet.buttonFct}>{planet.buttonText}</button>}
         </div>
     )
 };
